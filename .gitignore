@@ -1,5 +1,10 @@
-.D*
-/.vscode/
-*checkpoints*
-/2021/
-/additional/
+.ipynb_checkpoints/
+__pycache__/
+.venv/
+.env
+.DS_Store
+Thumbs.db
+outputs/*
+!outputs/.gitkeep
+data/raw/*
+!data/raw/.gitkeep
