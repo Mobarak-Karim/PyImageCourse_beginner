@@ -1,8 +1,162 @@
-# Beginner Image Processing Cheat Sheet
+# Python + Image Processing Beginner Cheat Sheet
 
 **Author: Md. Mobarak Karim, Ph.D.**
 
-This page is for quick recall. For **why/when to use each function**, see [`FUNCTION_GUIDE.md`](FUNCTION_GUIDE.md).
+This page is for quick recall. For **why/when to use image-processing functions**, see [`FUNCTION_GUIDE.md`](FUNCTION_GUIDE.md).
+
+# Part A — Python basics
+
+## Variables
+
+```python
+threshold = 150
+sample_name = "cell_01"
+is_valid = True
+```
+
+A variable is simply a name that refers to a value.
+
+## Common data types
+
+```python
+count = 10          # int
+pixel_size = 0.5    # float
+name = "green"      # str
+keep = True         # bool
+
+print(type(count))
+```
+
+## Lists
+
+```python
+files = ["a.tif", "b.tif", "c.tif"]
+
+print(files[0])   # first item
+print(files[-1])  # last item
+print(files[0:2]) # slice
+```
+
+## Call a function
+
+```python
+print("hello")
+length = len(files)
+```
+
+General pattern:
+
+```python
+function_name(argument)
+```
+
+Scientific functions often use keyword arguments:
+
+```python
+filtered = ski.filters.gaussian(image, sigma=2)
+```
+
+## Comparisons
+
+```python
+value > 10
+value < 20
+value == 15
+value != 15
+```
+
+Comparisons return `True` or `False`.
+
+## Boolean logic
+
+```python
+(value > 10) and (value < 20)
+condition_a or condition_b
+not condition_a
+```
+
+## `if / elif / else`
+
+```python
+if value > 20:
+    print("high")
+elif value > 10:
+    print("medium")
+else:
+    print("low")
+```
+
+Indentation matters in Python.
+
+## `for` loop
+
+```python
+for filename in files:
+    print(filename)
+```
+
+With an index:
+
+```python
+for index, filename in enumerate(files):
+    print(index, filename)
+```
+
+## `while` loop
+
+```python
+attempt = 0
+
+while attempt < 3:
+    print(attempt)
+    attempt += 1
+```
+
+Use `for` when you know what sequence you are iterating over. Use `while` when repetition depends on a condition.
+
+## Define your own function
+
+```python
+def pixels_to_um(length_pixels, pixel_size_um):
+    length_um = length_pixels * pixel_size_um
+    return length_um
+
+result = pixels_to_um(20, 0.5)
+```
+
+- `def` defines the function.
+- names inside parentheses are parameters.
+- `return` sends a result back.
+
+## Imports
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import filters
+```
+
+Then:
+
+```python
+mean_value = np.mean(values)
+plt.imshow(image)
+smoothed = filters.gaussian(image, sigma=1)
+```
+
+## Common errors
+
+| Error | Usually means |
+|---|---|
+| `NameError` | variable/function name does not exist |
+| `TypeError` | wrong kind of object used |
+| `IndexError` | index is outside the available range |
+| `FileNotFoundError` | path or filename is wrong |
+| `ModuleNotFoundError` | package missing or wrong environment active |
+
+Read the **last line of the traceback first**.
+
+# Part B — NumPy and image processing
 
 ## Inspect first
 
@@ -164,7 +318,9 @@ df.to_csv("outputs/results.csv", index=False)
 
 When an output looks wrong:
 
-1. Inspect the immediately preceding image/mask.
-2. Change one parameter only.
-3. Compare against the raw image.
-4. Write down why the parameter should affect the problem.
+1. Read the error message if there is one.
+2. Inspect the immediately preceding variable/image/mask.
+3. Print `type`, `shape`, `dtype`, or range when relevant.
+4. Change one parameter only.
+5. Compare against the raw image.
+6. Write down why the parameter should affect the problem.
